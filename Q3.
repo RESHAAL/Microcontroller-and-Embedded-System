@@ -1,0 +1,24 @@
+MOV 30H, #40H
+MOV 40H, #55H
+
+; PROGRAM 2
+MOV A, 30H ; INDIRECT ADDRESSING
+
+STOP: SJMP STOP
+END
+
+MOV 30H, #40H
+MOV 40H, #55H
+
+; PROGRAM 2
+MOV R0, 30H
+MOV A, @R0 ; INDIRECT ADDRESSING
+
+STOP: SJMP STOP
+END
+
+Even though both assembly programs refer to the same RAM address, they do not behave the same because they use different addressing modes. In direct addressing, the instruction accesses the data 
+stored at the given memory address itself. For example, when the program uses direct addressing with address 30H, the accumulator gets the value stored at RAM location 30H. However, in indirect addressing,
+the contents of the given address are treated as a pointer to another memory location. This means the value stored at 30H is first loaded into a register, and then that value is used as an address to fetch
+ data from another RAM location. As a result, the accumulator receives a different value. Therefore, even though both programs start with the same base address, the data fetched and the final output 
+differ because direct addressing accesses the data directly, while indirect addressing accesses data through a pointer.
