@@ -1,0 +1,6 @@
+MOV A, #01H ; A=00
+ORL A, #08H ; A=01
+ANL A, #0FH ; A=09
+MOV B, A ; B=09H
+CLR A
+ORL A, #80H ; A=80
