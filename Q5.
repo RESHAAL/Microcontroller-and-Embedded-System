@@ -1,0 +1,68 @@
+        MOV 40H, #12H
+        MOV 41H, #0FFH
+        MOV 42H, #25H
+        MOV 43H, #0FFH
+        MOV 44H, #30H
+        MOV 45H, #0FFH
+        MOV 46H, #44H
+        MOV 47H, #0FFH
+
+        MOV 48H, #55H
+        MOV 49H, #0FFH
+        MOV 4AH, #66H
+        MOV 4BH, #0FFH
+        MOV 4CH, #77H
+        MOV 4DH, #0FFH
+        MOV 4EH, #88H
+        MOV 4FH, #0FFH
+
+        MOV 50H, #99H
+        MOV 51H, #0FFH
+        MOV 52H, #0AAH
+        MOV 53H, #0FFH
+        MOV 54H, #0BBH
+        MOV 55H, #0FFH
+        MOV 56H, #0CCH
+        MOV 57H, #0FFH
+
+        MOV 58H, #0DDH
+        MOV 59H, #0FFH
+        MOV 5AH, #0EEH
+        MOV 5BH, #0FFH
+        MOV 5CH, #11H
+        MOV 5DH, #0FFH
+        MOV 5EH, #22H
+        MOV 5FH, #0FFH
+
+STOP:
+        SJMP STOP
+        END
+
+MOV R0, #40H     ; Read pointer
+MOV R1, #40H     ; Write pointer
+SCAN:
+      MOV A, R0
+      CJNE A, #60H, CHECK
+      SJMP FILL
+CHECK:
+      MOV A, @R0
+      CJNE A, #0FFH, COPY
+      INC R0
+      SJMP SCAN
+
+COPY:
+      MOV @R1, A
+      INC R1
+      INC R0
+      SJMP SCAN
+FILL:
+      MOV A, R1
+      CJNE A, #60H, ZERO
+      SJMP STOP
+ZERO:
+      MOV @R1, #00H
+      INC R1
+     SJMP FILL
+STOP:
+      SJMP STOP
+      END
